@@ -99,7 +99,7 @@ public class TedBottomPicker extends BottomSheetDialogFragment {
             Log.d(TAG, "onSlide() slideOffset: " + slideOffset);
         }
     };
-    
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -578,24 +578,25 @@ public class TedBottomPicker extends BottomSheetDialogFragment {
 
     private void onActivityResultCamera(final Uri cameraImageUri) {
 
-        MediaScannerConnection.scanFile(getContext(), new String[]{cameraImageUri.getPath()}, new String[]{"image/jpeg"}, new MediaScannerConnection.MediaScannerConnectionClient() {
-            @Override
-            public void onMediaScannerConnected() {
+        if (getContext() != null)
+            MediaScannerConnection.scanFile(getContext(), new String[]{cameraImageUri.getPath()}, new String[]{"image/jpeg"}, new MediaScannerConnection.MediaScannerConnectionClient() {
+                @Override
+                public void onMediaScannerConnected() {
 
-            }
+                }
 
-            @Override
-            public void onScanCompleted(String s, Uri uri) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        updateAdapter();
-                        complete(cameraImageUri);
-                    }
-                });
+                @Override
+                public void onScanCompleted(String s, Uri uri) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateAdapter();
+                            complete(cameraImageUri);
+                        }
+                    });
 
-            }
-        });
+                }
+            });
     }
 
 
@@ -774,7 +775,7 @@ public class TedBottomPicker extends BottomSheetDialogFragment {
             return this;
         }
 
-        public Builder setIncludeEdgeSpacing(boolean includeEdgeSpacing){
+        public Builder setIncludeEdgeSpacing(boolean includeEdgeSpacing) {
             this.includeEdgeSpacing = includeEdgeSpacing;
             return this;
         }
