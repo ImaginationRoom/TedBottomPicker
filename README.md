@@ -24,8 +24,8 @@ If you want pick image from gallery or take picture, this library can help easil
 
 ### Single/Multi Select
 
-![Screenshot](https://github.com/ParkSangGwon/TedBottomPicker/blob/master/screenshot1.jpeg?raw=true)    ![Screenshot](https://github.com/ParkSangGwon/TedBottomPicker/blob/master/demo.gif?raw=true)  
-![Screenshot](https://github.com/ParkSangGwon/TedBottomPicker/blob/master/screenshot_multi_select.jpeg?raw=true)    
+![Screenshot](https://github.com/ImaginationRoom/TedBottomPicker/blob/master/screenshot1.jpeg?raw=true)    ![Screenshot](https://github.com/ImaginationRoom/TedBottomPicker/blob/master/demo.gif?raw=true)
+![Screenshot](https://github.com/ImaginationRoom/TedBottomPicker/blob/master/screenshot_multi_select.jpeg?raw=true)
 
            
 
@@ -37,9 +37,11 @@ If you want pick image from gallery or take picture, this library can help easil
 
 ### Gradle
 [ ![Download](https://api.bintray.com/packages/tkdrnjs0912/maven/tedbottompicker/images/download.svg) ](https://bintray.com/tkdrnjs0912/maven/tedbottompicker/_latestVersion)
+![Release](https://jitpack.io/v/ImaginationRoom/TedBottomPicker.svg) (https://jitpack.io/#ImaginationRoom/TedBottomPicker)
+
 ```javascript
 dependencies {
-    compile 'gun0912.ted:tedbottompicker:x.y.z'
+    compile 'com.github.ImaginationRoom:TedBottomPicker:1.5'
 }
 
 ```
@@ -57,7 +59,7 @@ You have to grant `WRITE_EXTERNAL_STORAGE` permission from user.<br/>
 If your targetSDK version is 23+, you have to check permission and request permission to user.<br/>
 Because after Marshmallow(6.0), you have to not only decalare permisions in `AndroidManifest.xml` but also request permissions at runtime.<br/>
 There are so many permission check library in [Android-Arsenal](http://android-arsenal.com/tag/235?sort=rating)<br/>
-I recommend [TedPermission](https://github.com/ParkSangGwon/TedPermission)<br/>
+I recommend [TedPermission](https://github.com/ImaginationRoom/TedPermission)<br/>
 **TedPermission** is super simple and smart permission check library.<br/>
 <br/>
 
@@ -67,30 +69,18 @@ I recommend [TedPermission](https://github.com/ParkSangGwon/TedPermission)<br/>
 `TedBottomPicker.Builder` make `new TedBottomPicker()`.<br/>
 After then, you can show TedBottomPicker<br/>
 
-
+If you want select a single image, implement `Builder.OnImageSelectedListener` on your activity
 ```javascript
 
-     TedBottomPicker tedBottomPicker = new TedBottomPicker.Builder(MainActivity.this)
-                                .setOnImageSelectedListener(new TedBottomPicker.OnImageSelectedListener() {
-                                    @Override
-                                    public void onImageSelected(Uri uri) {
-                                        // here is selected uri
-                                    }
-                                })
-                                .create();
+     TedBottomPicker tedBottomPicker = new TedBottomPicker.Builder(MainActivity.this).create(MainActivity.this);
 
      tedBottomPicker.show(getSupportFragmentManager());
 ```
 
-If you want select multi image, you can use `OnMultiImageSelectedListener`
+If you want select multi image, implement `Builder.OnMultiImageSelectedListener` on your activity
 ```javascript
  TedBottomPicker bottomSheetDialogFragment = new TedBottomPicker.Builder(MainActivity.this)
-                               .setOnMultiImageSelectedListener(new TedBottomPicker.OnMultiImageSelectedListener() {
-                                   @Override
-                                   public void onImagesSelected(ArrayList<Uri> uriList) {
-                                       // here is selected uri list
-                                   }
-                               })
+                                .setIsMultiSelect(true)
                                 .setPeekHeight(1600)
                                 .showTitle(false)
                                 .setCompleteButtonText("Done")
@@ -101,7 +91,7 @@ If you want select multi image, you can use `OnMultiImageSelectedListener`
 ```
 
 **Don't forget!!**<br/>
-You have to declare `setOnImageSelectedListener()` or `OnMultiImageSelectedListener()` in Builder.<br/>
+You have to declare `setIsMultiSelect(true)` for `Builder.OnMultiImageSelectedListener()` in Builder.<br/>
 This listener will pass selected Uri/UriList.<br/>
 
 
