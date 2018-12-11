@@ -20,11 +20,14 @@ import com.bumptech.glide.request.RequestOptions;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
+import gun0912.tedbottompicker.Builder;
 import gun0912.tedbottompicker.TedBottomPicker;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Builder.OnMultiImageSelectedListener, Builder.OnImageSelectedListener {
 
 
     ImageView iv_image;
@@ -60,27 +63,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onPermissionGranted() {
 
-                        TedBottomPicker bottomSheetDialogFragment = new TedBottomPicker.Builder(MainActivity.this)
-                                .setOnImageSelectedListener(new TedBottomPicker.OnImageSelectedListener() {
-                                    @Override
-                                    public void onImageSelected(final Uri uri) {
-                                        Log.d("ted", "uri: " + uri);
-                                        Log.d("ted", "uri.getPath(): " + uri.getPath());
-                                        selectedUri = uri;
-
-                                        iv_image.setVisibility(View.VISIBLE);
-                                        mSelectedImagesContainer.setVisibility(View.GONE);
-
-                                        requestManager
-                                                .load(uri)
-                                                .into(iv_image);
-                                    }
-                                })
+                        TedBottomPicker bottomSheetDialogFragment = new Builder(MainActivity.this)
                                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
-                                .setSelectedUri(selectedUri)
+//                                .setSelectedUri(selectedUri)
                                 //.showVideoMedia()
                                 .setPeekHeight(1200)
-                                .create();
+                                .create(MainActivity.this);
 
                         bottomSheetDialogFragment.show(getSupportFragmentManager());
 
@@ -117,21 +105,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onPermissionGranted() {
 
-                        TedBottomPicker bottomSheetDialogFragment = new TedBottomPicker.Builder(MainActivity.this)
-                                .setOnMultiImageSelectedListener(new TedBottomPicker.OnMultiImageSelectedListener() {
-                                    @Override
-                                    public void onImagesSelected(ArrayList<Uri> uriList) {
-                                        selectedUriList = uriList;
-                                        showUriList(uriList);
-                                    }
-                                })
+                        TedBottomPicker bottomSheetDialogFragment = new Builder(MainActivity.this)
                                 //.setPeekHeight(getResources().getDisplayMetrics().heightPixels/2)
                                 .setPeekHeight(1600)
-                                .showTitle(false)
+                                .setShowTitle(false)
+                                .setIsMultiSelect(true)
                                 .setCompleteButtonText("Done")
                                 .setEmptySelectionText("No Select")
-                                .setSelectedUriList(selectedUriList)
-                                .create();
+//                                .setSelectedUriList(selectedUriList)
+                                .create(MainActivity.this);
 
                         bottomSheetDialogFragment.show(getSupportFragmentManager());
 
@@ -187,5 +169,25 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public void onImagesSelected(@NotNull ArrayList<Uri> uriList) {
+        selectedUriList = uriList;
+        showUriList(uriList);
+    }
+
+    @Override
+    public void onImageSelected(@NotNull Uri uri) {
+        Log.d("ted", "uri: " + uri);
+        Log.d("ted", "uri.getPath(): " + uri.getPath());
+        selectedUri = uri;
+
+        iv_image.setVisibility(View.VISIBLE);
+        mSelectedImagesContainer.setVisibility(View.GONE);
+
+        requestManager
+                .load(uri)
+                .into(iv_image);
     }
 }
