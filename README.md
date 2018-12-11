@@ -38,11 +38,24 @@ If you want pick image from gallery or take picture, this library can help easil
 ### Gradle
 ![Release](https://jitpack.io/v/ImaginationRoom/TedBottomPicker.svg) (https://jitpack.io/#ImaginationRoom/TedBottomPicker)
 
+Add the JitPack repository to your build file
+
+```javascript
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+
+```
+
+Add the dependency
+
 ```javascript
 dependencies {
     compile 'com.github.ImaginationRoom:TedBottomPicker:1.5.2'
 }
-
 ```
 
 If you think this library is useful, please press star button at upside. 
