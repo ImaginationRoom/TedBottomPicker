@@ -57,10 +57,13 @@ class Builder(
         internal var isMultiSelect: Boolean = false) : Parcelable {
 
 
+    private var context: Context? = null
+
     constructor(context: Context) : this() {
+        this.context = context
         setCameraTile(R.drawable.ic_camera)
         setGalleryTile(R.drawable.ic_gallery)
-        setSpacingResId(context, R.dimen.tedbottompicker_grid_layout_margin)
+        setSpacingResId(R.dimen.tedbottompicker_grid_layout_margin)
     }
 
     fun setCameraTile(@DrawableRes cameraTileResId: Int) = apply {
@@ -107,8 +110,8 @@ class Builder(
         this.isMultiSelect = isMultiSelect
     }
 
-    fun setSpacingResId(context: Context, @DimenRes dimenResId: Int) = apply {
-        setSpacing(context.resources.getDimensionPixelSize(dimenResId))
+    fun setSpacingResId(@DimenRes dimenResId: Int) = apply {
+        setSpacing(context!!.resources.getDimensionPixelSize(dimenResId))
     }
 
     fun setIncludeEdgeSpacing(includeEdgeSpacing: Boolean) = apply {
@@ -119,8 +122,8 @@ class Builder(
         this.peekHeight = peekHeight
     }
 
-    fun setPeekHeightResId(context: Context, @DimenRes dimenResId: Int) = apply {
-        setPeekHeight(context.resources.getDimensionPixelSize(dimenResId))
+    fun setPeekHeightResId(@DimenRes dimenResId: Int) = apply {
+        setPeekHeight(context!!.resources.getDimensionPixelSize(dimenResId))
     }
 
     fun setCameraTileBackgroundResId(@ColorRes colorResId: Int) = apply {
@@ -135,8 +138,8 @@ class Builder(
         this.title = title
     }
 
-    fun setTitle(context: Context, @StringRes stringResId: Int) = apply {
-        setTitle(context.resources.getString(stringResId))
+    fun setTitle(@StringRes stringResId: Int) = apply {
+        setTitle(context!!.resources.getString(stringResId))
     }
 
     fun setShowTitle(showTitle: Boolean) = apply {
@@ -147,32 +150,32 @@ class Builder(
         this.completeButtonText = completeButtonText
     }
 
-    fun setCompleteButtonText(context: Context, @StringRes completeButtonResId: Int) = apply {
-        setCompleteButtonText(context.resources.getString(completeButtonResId))
+    fun setCompleteButtonText(@StringRes completeButtonResId: Int) = apply {
+        setCompleteButtonText(context!!.resources.getString(completeButtonResId))
     }
 
     fun setEmptySelectionText(emptySelectionText: String) = apply {
         this.emptySelectionText = emptySelectionText
     }
 
-    fun setEmptySelectionText(context: Context, @StringRes emptySelectionResId: Int) = apply {
-        setEmptySelectionText(context.resources.getString(emptySelectionResId))
+    fun setEmptySelectionText(@StringRes emptySelectionResId: Int) = apply {
+        setEmptySelectionText(context!!.resources.getString(emptySelectionResId))
     }
 
     fun setSelectMaxCountErrorText(selectMaxCountErrorText: String) = apply {
         this.selectMaxCountErrorText = selectMaxCountErrorText
     }
 
-    fun setSelectMaxCountErrorText(context: Context, @StringRes selectMaxCountErrorResId: Int) = apply {
-        setSelectMaxCountErrorText(context.resources.getString(selectMaxCountErrorResId))
+    fun setSelectMaxCountErrorText(@StringRes selectMaxCountErrorResId: Int) = apply {
+        setSelectMaxCountErrorText(context!!.resources.getString(selectMaxCountErrorResId))
     }
 
     fun setSelectMinCountErrorText(selectMinCountErrorText: String) = apply {
         this.selectMinCountErrorText = selectMinCountErrorText
     }
 
-    fun setSelectMinCountErrorText(context: Context, @StringRes selectMinCountErrorResId: Int) = apply {
-        setSelectMinCountErrorText(context.resources.getString(selectMinCountErrorResId))
+    fun setSelectMinCountErrorText(@StringRes selectMinCountErrorResId: Int) = apply {
+        setSelectMinCountErrorText(context!!.resources.getString(selectMinCountErrorResId))
     }
 
     fun setTitleBackgroundResId(@ColorRes colorResId: Int) = apply {
@@ -192,8 +195,8 @@ class Builder(
         this.mediaType = MediaTypeValue.VIDEO
     }
 
-    fun create(context: Context): TedBottomPicker {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+    fun create(): TedBottomPicker {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && ContextCompat.checkSelfPermission(context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             throw RuntimeException("Missing required WRITE_EXTERNAL_STORAGE permission. Did you remember to request it first?")
         }
 

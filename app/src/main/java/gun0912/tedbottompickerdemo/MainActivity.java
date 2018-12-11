@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements Builder.OnMultiIm
 //                                .setSelectedUri(selectedUri)
                                 //.showVideoMedia()
                                 .setPeekHeight(1200)
-                                .create(MainActivity.this);
+                                .create();
 
                         bottomSheetDialogFragment.show(getSupportFragmentManager());
 
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements Builder.OnMultiIm
                                 .setCompleteButtonText("Done")
                                 .setEmptySelectionText("No Select")
 //                                .setSelectedUriList(selectedUriList)
-                                .create(MainActivity.this);
+                                .create();
 
                         bottomSheetDialogFragment.show(getSupportFragmentManager());
 

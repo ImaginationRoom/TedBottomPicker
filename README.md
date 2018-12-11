@@ -40,7 +40,7 @@ If you want pick image from gallery or take picture, this library can help easil
 
 ```javascript
 dependencies {
-    compile 'com.github.ImaginationRoom:TedBottomPicker:1.5.1'
+    compile 'com.github.ImaginationRoom:TedBottomPicker:1.5.2'
 }
 
 ```
