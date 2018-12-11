@@ -36,7 +36,6 @@ If you want pick image from gallery or take picture, this library can help easil
 
 
 ### Gradle
-[ ![Download](https://api.bintray.com/packages/tkdrnjs0912/maven/tedbottompicker/images/download.svg) ](https://bintray.com/tkdrnjs0912/maven/tedbottompicker/_latestVersion)
 ![Release](https://jitpack.io/v/ImaginationRoom/TedBottomPicker.svg) (https://jitpack.io/#ImaginationRoom/TedBottomPicker)
 
 ```javascript
